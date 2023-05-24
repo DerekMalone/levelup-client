@@ -15,7 +15,7 @@ export const NavBar = () => {
           Event List
         </Link>
       </li>
-      <li className='navbar__item'>Navigation link</li>
+      {/* <li className='navbar__item'>Navigation link</li> */}
       {localStorage.getItem("lu_token") !== null ? (
         <li className='nav-item'>
           <button
