@@ -96,21 +96,16 @@ export const GameForm = () => {
       <fieldset>
         <div className='form-group'>
           <label htmlFor='gameType'>Choose a Game Type:</label>
-          <select onChange={changeGameState}>
+          <select name='gameTypeId' onChange={changeGameState}>
             <option value={0}>Select Game Type</option>
             {gameTypes.map((gameType) => (
-              <option key={gameType.id} name='gameType' value={gameType.id}>
+              <option key={gameType.id} value={gameType.id}>
                 {gameType.label}
               </option>
             ))}
           </select>
         </div>
       </fieldset>
-      {/*     skillLevel: 1,
-          numberOfPlayers: 0,
-          title: "",
-          maker: "",
-          gameTypeId: 0, */}
 
       <button
         type='submit'
