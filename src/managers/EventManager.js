@@ -16,3 +16,11 @@ export const createEvent = (event) => {
     body: JSON.stringify(event),
   }).then((resp) => resp.json());
 };
+
+export const getSingleEvent = (pk) => {
+  return fetch(`http://localhost:8000/events/${pk}`, {
+    headers: {
+      Authorization: `Token ${localStorage.getItem("lu_token")}`,
+    },
+  }).then((response) => response.json());
+};

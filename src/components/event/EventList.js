@@ -22,7 +22,12 @@ export const EventList = (props) => {
       {events.map((event) => {
         return (
           <section key={`event--${event.id}`} className='event'>
-            <div className='event__title'>
+            <div
+              className='event__title'
+              onClick={() =>
+                navigate({ pathname: `/events/update/${event.id}` })
+              }
+            >
               {event.description} by {event.organizer.full_name}
             </div>
             <div className='event__players'>
