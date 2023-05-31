@@ -23,7 +23,10 @@ export const GameList = (props) => {
       {games.map((game) => {
         return (
           <section key={`game--${game.id}`} className='game'>
-            <div className='game__title'>
+            <div
+              className='game__title'
+              onClick={() => navigate({ pathname: `games/update/${game.id}` })}
+            >
               {game.title} by {game.maker}
             </div>
             <div className='game__players'>

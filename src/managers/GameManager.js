@@ -6,6 +6,14 @@ export const getGames = () => {
   }).then((response) => response.json());
 };
 
+export const getSingleGame = (pk) => {
+  return fetch(`http://localhost:8000/games/${pk}`, {
+    headers: {
+      Authorization: `Token ${localStorage.getItem("lu_token")}`,
+    },
+  }).then((response) => response.json());
+};
+
 export const createGame = (game) => {
   return fetch("http://localhost:8000/games", {
     method: "POST",
@@ -23,4 +31,15 @@ export const getGameTypes = () => {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
     },
   }).then((response) => response.json());
+};
+
+export const updateGame = (updatedGame) => {
+  return fetch(`http://localhost:8000/games/${updatedGame.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${localStorage.getItem("lu_token")}`,
+    },
+    body: JSON.stringify(updatedGame),
+  });
 };

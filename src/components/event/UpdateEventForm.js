@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getGames } from "../../managers/GameManager";
-import { createEvent, getSingleEvent } from "../../managers/EventManager";
+import { updateEvent, getSingleEvent } from "../../managers/EventManager";
 
 export const UpdateEventForm = () => {
   const [games, setGames] = useState([]);
@@ -17,7 +17,16 @@ export const UpdateEventForm = () => {
 
   useEffect(() => {
     if (eventId) {
-      getSingleEvent(eventId).then((evnt) => setCurrentEvent(evnt));
+      getSingleEvent(eventId).then((evnt) =>
+        setCurrentEvent({
+          id: evnt.id,
+          description: evnt.description,
+          date: evnt.date,
+          time: evnt.time,
+          gameId: evnt.game.id,
+          game: evnt.game,
+        })
+      );
       getGames().then((games) => setGames(games));
     }
   }, []);
@@ -98,7 +107,8 @@ export const UpdateEventForm = () => {
           // Prevent form from being submitted
           evt.preventDefault();
 
-          const newEvent = {
+          const updatedEvent = {
+            id: eventId,
             description: currentEvent.description,
             date: currentEvent.date,
             time: currentEvent.time,
@@ -106,11 +116,11 @@ export const UpdateEventForm = () => {
           };
 
           // Send POST request to your API
-          createEvent(newEvent).then(() => navigate("/events"));
+          updateEvent(updatedEvent).then(() => navigate("/events"));
         }}
         className='btn btn-primary'
       >
-        Create
+        Update
       </button>
     </form>
   );

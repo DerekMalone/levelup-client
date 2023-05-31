@@ -194,3 +194,7 @@ code {
 .icon-send:before {
 	content: "🔓";
 }
+
+.event__title, .game__title {
+	color: #27ae60;
+}
