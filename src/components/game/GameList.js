@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getGames } from "../../managers/GameManager.js";
+import { getGames, deleteGame } from "../../managers/GameManager.js";
 import { useNavigate } from "react-router-dom";
 
 export const GameList = (props) => {
@@ -9,6 +9,12 @@ export const GameList = (props) => {
   useEffect(() => {
     getGames().then((data) => setGames(data));
   }, []);
+
+  const handleDelete = (gameId) => {
+    deleteGame(gameId).then(() =>
+      getGames().then((gamesArray) => setGames(gamesArray))
+    );
+  };
 
   return (
     <article className='games'>
@@ -23,11 +29,16 @@ export const GameList = (props) => {
       {games.map((game) => {
         return (
           <section key={`game--${game.id}`} className='game'>
-            <div
-              className='game__title'
-              onClick={() => navigate({ pathname: `games/update/${game.id}` })}
-            >
-              {game.title} by {game.maker}
+            <div className='game__info'>
+              <div
+                className='game__title'
+                onClick={() =>
+                  navigate({ pathname: `games/update/${game.id}` })
+                }
+              >
+                {game.title}
+              </div>{" "}
+              by {game.maker}
             </div>
             <div className='game__players'>
               {game.number_of_players} players needed
@@ -35,6 +46,9 @@ export const GameList = (props) => {
             <div className='game__skillLevel'>
               Skill level is {game.skill_level}
             </div>
+            <button type='button' onClick={() => handleDelete(game.id)}>
+              Delete
+            </button>
           </section>
         );
       })}

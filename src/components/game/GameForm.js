@@ -122,7 +122,7 @@ export const GameForm = () => {
           };
 
           // Send POST request to your API
-          createGame(game).then(() => navigate("/games"));
+          createGame(game).then(() => navigate("/"));
         }}
         className='btn btn-primary'
       >
