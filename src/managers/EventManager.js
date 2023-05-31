@@ -24,3 +24,14 @@ export const getSingleEvent = (pk) => {
     },
   }).then((response) => response.json());
 };
+
+export const updateEvent = (updatedEvnt) => {
+  return fetch(`http://localhost:8000/events/${updatedEvnt.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${localStorage.getItem("lu_token")}`,
+    },
+    body: JSON.stringify(updatedEvnt),
+  });
+};
